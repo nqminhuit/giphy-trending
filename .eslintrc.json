@@ -1,0 +1,160 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "destructuring": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "warn",
+      "unix"
+    ],
+    "quotes": [
+      "warn",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "max-len": [
+      "warn",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "eqeqeq": "warn",
+    "array-callback-return": "warn",
+    "block-scoped-var": "error",
+    "class-methods-use-this": "error",
+    "consistent-return": [
+      "error",
+      {
+        "treatUndefinedAsUnspecified": true
+      }
+    ],
+    "curly": "warn",
+    "wrap-iife": "warn",
+    "prefer-promise-reject-errors": "warn",
+    "no-unmodified-loop-condition": "warn",
+    "no-throw-literal": "warn",
+    "no-sequences": "warn",
+    "no-self-compare": "error",
+    "no-return-assign": "warn",
+    "no-param-reassign": "error",
+    "no-new-wrappers": "warn",
+    "no-new-func": "warn",
+    "no-loop-func": "error",
+    "no-lone-blocks": "warn",
+    "no-invalid-this": "error",
+    "no-implied-eval": "warn",
+    "no-implicit-coercion": "warn",
+    "no-fallthrough": "warn",
+    "no-extra-bind": "warn",
+    "no-eval": "error",
+    "no-eq-null": "warn",
+    "no-empty-function": "warn",
+    "no-div-regex": "warn",
+    "no-caller": "warn",
+    "no-unused-vars": "warn",
+    "guard-for-in": "warn",
+    "dot-notation": "warn",
+    "default-param-last": "warn",
+    "brace-style": [
+      "warn",
+      "stroustrup"
+    ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "only-multiline",
+        "objects": "only-multiline",
+        "imports": "only-multiline",
+        "exports": "only-multiline",
+        "functions": "only-multiline"
+      }
+    ],
+    "func-name-matching": "warn",
+    "lines-between-class-members": "warn",
+    "new-parens": "warn",
+    "no-array-constructor": "warn",
+    "no-bitwise": [
+      "warn",
+      {
+        "int32Hint": true
+      }
+    ],
+    "no-lonely-if": "warn",
+    "no-multi-assign": "warn",
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 2
+      }
+    ],
+    "no-negated-condition": "warn",
+    "no-nested-ternary": "warn",
+    "object-curly-spacing": [
+      "warn",
+      "always",
+      {
+        "arraysInObjects": true
+      }
+    ],
+    "no-console": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          "@material-ui/*/*/*",
+          "!@material-ui/core/test-utils/*"
+        ]
+      }
+    ],
+    "no-warning-comments": [
+      "warn",
+      {
+        "terms": [
+          "fixme"
+        ],
+        "location": "anywhere"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
