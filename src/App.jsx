@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
+import GiphyGallery from "./view/GiphyGallery.jsx";
 
 export const App = () => (
-  <div className="container bg-light">Wellcome to Giphy Trending</div>
+  <GiphyGallery />
 );
