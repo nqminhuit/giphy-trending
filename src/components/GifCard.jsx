@@ -6,15 +6,22 @@ import GifMeta from "./GifMeta.jsx";
 
 // TODO introduce context to avoid props drilling
 export default function GifCard({
-  imgSrc, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername
+  imgSrc, imgTitle, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername
 }) {
 
   return (
     <>
       {imgSrc && (
         <div className="w-95 m-auto font-size-small">
-          <div className="d-flex flex-column justify-content-between bg-white shadow py-2">
-            <img className="img-fluid p-2 cursor-pointer" src={imgSrc} onClick={viewImage} />
+          <div className="d-flex flex-column bg-white shadow gif-card-fixed-height">
+            <div className="d-flex flex-grow-1 mx-auto">
+              <img
+                className="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain"
+                src={imgSrc}
+                alt={imgTitle}
+                onClick={viewImage}
+              />
+            </div>
             <GifMeta {...{ numView, numComment, numLove }} />
           </div>
           <GifAuthorInfo {...{ authorImgUrl, authorProfileUrl, authorUsername }} />
@@ -27,6 +34,7 @@ export default function GifCard({
 
 GifCard.propTypes = {
   imgSrc: PropTypes.string,
+  imgTitle: PropTypes.string,
   numView: PropTypes.number,
   numComment: PropTypes.number,
   numLove: PropTypes.number,

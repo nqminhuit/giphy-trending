@@ -1,40 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GifCard from "../components/GifCard.jsx";
+import Constants from "../constants/AppConstants.js";
+import { fetchGifs } from "../controllers/FetchGifs.js";
+import { randomNumber } from "../utils/RandomNumber.js";
 
 export default function GiphyGallery() {
+  const [gifs, setGifs] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [paging, setPaging] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener("scroll", fetchMoreGifs);
+    return function cleanUpScrollEvent() {
+      window.removeEventListener("scroll", fetchMoreGifs);
+    };
+  });
+
+  useEffect(() => {
+    fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, offset, Constants.LIMIT_GIFS_PER_LOAD)
+      .then(({ truncatedGifs: newGifs, pagination }) => {
+        setGifs(oldGifs => oldGifs.concat(newGifs));
+        setPaging(pagination);
+      })
+      .catch(console.error);
+  }, [offset]);
+
+  function fetchMoreGifs() {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const { total_count, count, offset: pagingOffset } = paging;
+    if (scrollTop + clientHeight >= scrollHeight - 10 && pagingOffset + count < total_count) {
+      setOffset(offset + count);
+    }
+  }
 
   return (
-    <>
+    <div className="container">
       <h1 className="text-center">Wellcome to Giphy Trending!</h1>
-      <div className="container bg-light d-flex flex-wrap justify-content-evenly">
+      <div className="bg-light d-flex flex-wrap justify-content-evenly">
         {
-          gifCards().map(i => (
-            <div key={i} className="col-6 col-md-4 col-lg-3 my-3">
-              <GifCard
-                imgSrc="https://media3.giphy.com/media/r3Q4NsodpaSpwsOzmF/200_s.gif?cid=1405890bx3dbf14mp804pe78sqmpxxggyqz6p5pmz9yfw0t8&rid=200_s.gif"
-                numView={7693}
-                numComment={30}
-                numLove={901}
-                authorImgUrl="https://media3.giphy.com/channel_assets/snl/FNmjSGabYyy5.jpg"
-                authorProfileUrl="#"
-                authorUsername="username"
-              />
-            </div>
-          ))
+          gifs.map(gifItem => {
+            const { id, user, title, gif } = gifItem;
+            return (
+              <div key={id} className="col-6 col-md-4 col-lg-3 my-3">
+                <GifCard
+                  imgSrc={gif.fixed_height.webp}
+                  imgTitle={title}
+                  numView={randomNumber(0, 10_000)}
+                  numComment={randomNumber(0, 100)}
+                  numLove={randomNumber(0, 1000)}
+                  authorImgUrl={user && user.avatar_url}
+                  authorProfileUrl={user && user.profile_url}
+                  authorUsername={user && user.username}
+                />
+              </div>
+            );
+          })
         }
       </div>
-    </>
+    </div>
   );
-
 }
-
-function gifCards() {
-  const cards = [];
-  for (let i = 0; i < 20; i++) {
-    cards.push(i);
-  }
-  return cards;
-}
-
-GiphyGallery.propTypes = {
-};
