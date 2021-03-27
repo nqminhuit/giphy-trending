@@ -28,8 +28,8 @@ export default function GiphyGallery() {
   function fetchMoreGifs() {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
     const { total_count, count, offset: pagingOffset } = paging;
-    if (scrollTop + clientHeight >= scrollHeight - 10 && pagingOffset + count <= total_count) {
-      setOffset(offset + Constants.LIMIT_GIFS_PER_LOAD);
+    if (scrollTop + clientHeight >= scrollHeight - 10 && pagingOffset + count < total_count) {
+      setOffset(offset + count);
     }
   }
 
