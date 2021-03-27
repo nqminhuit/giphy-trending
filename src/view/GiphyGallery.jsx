@@ -13,8 +13,10 @@ export default function GiphyGallery() {
               <GifCard
                 imgSrc="https://media3.giphy.com/media/r3Q4NsodpaSpwsOzmF/200_s.gif?cid=1405890bx3dbf14mp804pe78sqmpxxggyqz6p5pmz9yfw0t8&rid=200_s.gif"
                 numView={7693}
-                numChat={30}
+                numComment={30}
                 numLove={901}
+                authorProfileUrl="#"
+                authorUsername="username"
               />
             </div>
           ))
