@@ -10,7 +10,12 @@ export default function GiphyGallery() {
         {
           gifCards().map(i => (
             <div key={i} className="col-6 col-md-4 col-lg-3 my-3">
-              <GifCard />
+              <GifCard
+                imgSrc="https://media3.giphy.com/media/r3Q4NsodpaSpwsOzmF/200_s.gif?cid=1405890bx3dbf14mp804pe78sqmpxxggyqz6p5pmz9yfw0t8&rid=200_s.gif"
+                numView={7693}
+                numChat={30}
+                numLove={901}
+              />
             </div>
           ))
         }

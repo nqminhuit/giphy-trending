@@ -13,5 +13,5 @@ export default function Icon({ className, iconClass, description }) {
 
 Icon.propTypes = {
   iconClass: PropTypes.string,
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
