@@ -19,13 +19,13 @@ export function extractGifsData(httpResponse) {
  * Truncate unnecessary meta data.
  */
 export function truncateGifData(gifData) {
-  const { id, images, user } = gifData;
+  const { id, title, images, user } = gifData;
   if (!images) {
-    // because images is required data
+    // because 'images' is required data
     throw new Error("no gif images found");
   }
   const { fixed_height, original } = images;
-  let result = { id, gif: { fixed_height, original } };
+  let result = { id, title, gif: { fixed_height, original } };
 
   if (user) {
     const { avatar_url, username, profile_url } = user;

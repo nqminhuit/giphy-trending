@@ -18,12 +18,13 @@ export default function GiphyGallery() {
       <h1 className="text-center">Wellcome to Giphy Trending!</h1>
       <div className="container bg-light d-flex flex-wrap justify-content-evenly">
         {
-          gifs.map(gif => {
-            const { user } = gif;
+          gifs.map(gifItem => {
+            const { id, user, title, gif } = gifItem;
             return (
-              <div key={gif.id} className="col-6 col-md-4 col-lg-3 my-3">
+              <div key={id} className="col-6 col-md-4 col-lg-3 my-3">
                 <GifCard
-                  imgSrc={gif.gif.fixed_height.url}
+                  imgSrc={gif.fixed_height.webp}
+                  imgTitle={title}
                   numView={randomNumber(0, 10_000)}
                   numComment={randomNumber(0, 100)}
                   numLove={randomNumber(0, 1000)}
