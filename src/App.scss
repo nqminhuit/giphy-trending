@@ -22,8 +22,16 @@ body {
   max-height: 1rem;
 }
 
+.gif-card-max-height {
+  height: 13rem;
+}
+
 .gif-card-fixed-height {
   height: 15rem;
+}
+
+.fit-contain {
+  object-fit: contain;
 }
 
 .w-95 {
@@ -43,6 +51,9 @@ body {
 @include media-breakpoint-down(md) {
   .gif-card-fixed-height {
     height: 50vw;
+  }
+  .gif-card-max-height {
+    height: 45vw;
   }
 }
 

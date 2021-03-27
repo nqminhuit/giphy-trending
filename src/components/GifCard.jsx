@@ -15,7 +15,11 @@ export default function GifCard({
         <div className="w-95 m-auto font-size-small">
           <div className="d-flex flex-column bg-white shadow gif-card-fixed-height">
             <div className="d-flex flex-grow-1 mx-auto">
-              <img className="img-fluid p-2 cursor-pointer align-self-center" src={imgSrc} onClick={viewImage} />
+              <img
+                className="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain"
+                src={imgSrc}
+                onClick={viewImage}
+              />
             </div>
             <GifMeta {...{ numView, numComment, numLove }} />
           </div>
