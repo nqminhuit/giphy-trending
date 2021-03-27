@@ -15,6 +15,7 @@ export default function Icon({ className, iconClass, description, handleOnClick 
 }
 
 Icon.propTypes = {
+  className: PropTypes.string,
   iconClass: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   handleOnClick: PropTypes.func,

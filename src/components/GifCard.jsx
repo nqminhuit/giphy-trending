@@ -29,5 +29,9 @@ export default function GifCard({ imgSrc, numView, numComment, numLove, authorPr
 
 GifCard.propTypes = {
   imgSrc: PropTypes.string,
+  numView: PropTypes.number,
+  numComment: PropTypes.number,
+  numLove: PropTypes.number,
   authorProfileUrl: PropTypes.string,
+  authorUsername: PropTypes.string,
 };
