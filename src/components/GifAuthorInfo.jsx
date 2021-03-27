@@ -7,7 +7,7 @@ export default function GifAuthorInfo({ authorImgUrl, authorProfileUrl, authorUs
     <>
       {authorUsername && (
         <div className="mt-2 ms-2">
-          <a href={authorProfileUrl} className="text-decoration-none fw-bold cl-royalblue">
+          <a href={authorProfileUrl} target="_blank" className="text-decoration-none fw-bold cl-royalblue">
             {authorImgUrl &&
               <img
                 className="max-height-1rem rounded-circle me-1"

@@ -1,21 +1,7 @@
-import axios from "axios";
-
-export function fetchGifs(apiEndpoint, api_key, offset, limit) {
-  return new Promise((resolve, reject) => {
-    axios.get(apiEndpoint, { params: { api_key, offset, limit, } })
-      .then(result => {
-        const gifsData = extractGifsData(result);
-        const truncatedGifs = gifsData.map(truncateGifData);
-        resolve(truncatedGifs);
-      })
-      .catch(reject);
-  });
-}
-
 /**
  * Safely extracting gif data.
  */
-function extractGifsData(httpResponse) {
+export function extractGifsData(httpResponse) {
   const responseData = httpResponse.data;
   if (!responseData) {
     throw new Error("No response data found");
@@ -32,7 +18,7 @@ function extractGifsData(httpResponse) {
 /**
  * Truncate unnecessary meta data.
  */
-function truncateGifData(gifData) {
+export function truncateGifData(gifData) {
   const { id, images, user } = gifData;
   if (!images) {
     // because images is required data
