@@ -1,12 +1,4 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
-
-@import "~bootstrap/scss/utilities/api";
-
+@import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 body {
@@ -14,10 +6,32 @@ body {
   font-weight: 400;
 }
 
-.w-200 {
-  width: 200px;
+.cl-royalblue {
+  color: royalblue
 }
 
-.h-200 {
-  height: 200px;
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-hover-royalblue:hover {
+  color: royalblue !important
+}
+
+.max-height-1rem {
+  max-height: 1rem;
+}
+
+.w-95 {
+  width: 95% !important;
+}
+
+.font-size-small {
+  font-size: small;
+}
+
+@include media-breakpoint-down(sm) {
+  .font-size-small {
+    font-size: .4rem;
+  }
 }

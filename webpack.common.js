@@ -28,7 +28,22 @@ module.exports = {
       {
         test: /\.(scss)$/,
         use: ["style-loader", "css-loader", "sass-loader"]
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.woff(2)?/,
+        include: path.resolve(__dirname, "./node_modules/bootstrap-icons/font/fonts/"),
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "fonts/"
+          }
+        }
+      },
     ]
   },
   plugins: [
