@@ -3,7 +3,11 @@ import React from "react";
 
 export default function Icon({ className, iconClass, description }) {
 
-  return <i className={iconClass + " " + className}>{description}</i>;
+  return (
+    <span className={className + " cursor-pointer text-black-50 text-hover-royalblue"}>
+      <i className={iconClass}>{description}</i>
+    </span>
+  );
 
 }
 

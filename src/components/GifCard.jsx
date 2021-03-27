@@ -9,7 +9,7 @@ export default function GifCard() {
         <img className="img-fluid p-2"
           src="https://media3.giphy.com/media/r3Q4NsodpaSpwsOzmF/200_s.gif?cid=1405890bx3dbf14mp804pe78sqmpxxggyqz6p5pmz9yfw0t8&rid=200_s.gif"></img>
         <div className="d-flex justify-content-between px-1">
-          <i className="bi bi-paperclip"></i>
+          <Icon iconClass="bi bi-paperclip" />
           <div>
             <Icon className="me-3" iconClass="bi bi-eye-fill" description="7693" />
             <Icon className="me-3" iconClass="bi bi-chat-quote-fill" description="30" />
