@@ -1,14 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 body {
   font-family: "Roboto";
   font-weight: 400;
-}
-
-.h-200p {
-  height: 200px;
 }
 
 .cl-royalblue {
@@ -21,4 +16,18 @@ body {
 
 .text-hover-royalblue:hover {
   color: royalblue !important
+}
+
+.max-height-1rem {
+  max-height: 1rem;
+}
+
+.font-size-small {
+  font-size: small;
+}
+
+@include media-breakpoint-down(sm) {
+  .font-size-small {
+    font-size: .4rem;
+  }
 }

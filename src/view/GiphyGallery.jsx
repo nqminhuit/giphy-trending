@@ -15,6 +15,7 @@ export default function GiphyGallery() {
                 numView={7693}
                 numComment={30}
                 numLove={901}
+                authorImgUrl="https://media3.giphy.com/channel_assets/snl/FNmjSGabYyy5.jpg"
                 authorProfileUrl="#"
                 authorUsername="username"
               />
