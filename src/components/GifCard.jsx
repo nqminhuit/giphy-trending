@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { viewImage } from "../utils/ImageMetaUtils.js";
+import { useHistory } from "react-router";
 import GifAuthorInfo from "./GifAuthorInfo.jsx";
 import GifMeta from "./GifMeta.jsx";
 
 // TODO introduce context to avoid props drilling
 export default function GifCard({
-  imgSrc, imgTitle, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername
+  imgId, imgSrc, imgTitle, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername,
+  imgOrgriginalSrc
 }) {
+  const history = useHistory();
 
   return (
     <>
@@ -19,10 +21,10 @@ export default function GifCard({
                 className="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain"
                 src={imgSrc}
                 alt={imgTitle}
-                onClick={viewImage}
+                onClick={() => history.push(`view/${imgId}`, { gifOriginUrl: imgOrgriginalSrc })}
               />
             </div>
-            <GifMeta {...{ numView, numComment, numLove }} />
+            <GifMeta {...{ numView, numComment, numLove, imgId, imgOrgriginalSrc }} />
           </div>
           <GifAuthorInfo {...{ authorImgUrl, authorProfileUrl, authorUsername }} />
         </div>
@@ -34,6 +36,8 @@ export default function GifCard({
 
 GifCard.propTypes = {
   imgSrc: PropTypes.string,
+  imgId: PropTypes.string,
+  imgOrgriginalSrc: PropTypes.string,
   imgTitle: PropTypes.string,
   numView: PropTypes.number,
   numComment: PropTypes.number,
