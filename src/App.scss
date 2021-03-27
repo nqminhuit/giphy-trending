@@ -1,11 +1,13 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/utilities";
-@import "~bootstrap/scss/containers";
-@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/containers";
+// @import "~bootstrap/scss/grid";
 
-@import "~bootstrap/scss/utilities/api";
+// @import "~bootstrap/scss/utilities/api";
+
+@import "~bootstrap/scss/bootstrap";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
@@ -14,10 +16,10 @@ body {
   font-weight: 400;
 }
 
-.w-200 {
-  width: 200px;
+.h-200p {
+  height: 200px;
 }
 
-.h-200 {
-  height: 200px;
+.cl-royalblue {
+  color: royalblue
 }
