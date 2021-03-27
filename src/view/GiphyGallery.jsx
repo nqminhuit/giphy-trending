@@ -25,13 +25,13 @@ export default function GiphyGallery() {
       .catch(console.error);
   }, [offset]);
 
-  function fetchMoreGifs() {
+  const fetchMoreGifs = () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
     const { total_count, count, offset: pagingOffset } = paging;
     if (scrollTop + clientHeight >= scrollHeight - 10 && pagingOffset + count < total_count) {
       setOffset(offset + count);
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -43,7 +43,9 @@ export default function GiphyGallery() {
             return (
               <div key={id} className="col-6 col-md-4 col-lg-3 my-3">
                 <GifCard
+                  imgId={id}
                   imgSrc={gif.fixed_height.webp}
+                  imgOrgriginalSrc={gif.original.url}
                   imgTitle={title}
                   numView={randomNumber(0, 10_000)}
                   numComment={randomNumber(0, 100)}

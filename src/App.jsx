@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
-import GiphyGallery from "./view/GiphyGallery.jsx";
+import AppRoutes from "./components/AppRoutes.jsx";
 
 export const App = () => (
-  <GiphyGallery />
+  <AppRoutes />
 );

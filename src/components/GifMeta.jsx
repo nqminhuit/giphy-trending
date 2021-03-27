@@ -1,21 +1,22 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useHistory } from "react-router";
 import { isNotBlank } from "../utils/ContentValidationUtils.js";
-import { commentImage, loveImage, saveImage, viewImage } from "../utils/ImageMetaUtils.js";
 import Icon from "./common/Icon.jsx";
 
-export default function GifMeta({ numView, numComment, numLove }) {
+export default function GifMeta({ numView, numComment, numLove, imgOrgriginalSrc, imgId }) {
+  const history = useHistory();
 
   return (
     <div className="d-flex justify-content-between px-1 mb-1">
-      <Icon iconClass="bi bi-paperclip" handleOnClick={saveImage} />
+      <Icon iconClass="bi bi-paperclip" />
       <div>
         {isNotBlank(numView) &&
           <Icon
             className="me-3"
             iconClass="bi bi-eye-fill"
             description={numView}
-            handleOnClick={viewImage}
+            handleOnClick={() => history.push(`view/${imgId}`, { gifOriginUrl: imgOrgriginalSrc })}
           />
         }
         {isNotBlank(numComment) &&
@@ -23,7 +24,6 @@ export default function GifMeta({ numView, numComment, numLove }) {
             className="me-3"
             iconClass="bi bi-chat-quote-fill"
             description={numComment}
-            handleOnClick={commentImage}
           />
         }
         {isNotBlank(numLove) &&
@@ -31,7 +31,6 @@ export default function GifMeta({ numView, numComment, numLove }) {
             className="pe-1"
             iconClass="bi bi-heart-fill"
             description={numLove}
-            handleOnClick={loveImage}
           />
         }
       </div>
@@ -44,4 +43,6 @@ GifMeta.propTypes = {
   numView: PropTypes.number,
   numComment: PropTypes.number,
   numLove: PropTypes.number,
+  imgOrgriginalSrc: PropTypes.string,
+  imgId: PropTypes.string,
 };
