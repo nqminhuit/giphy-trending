@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { isNotBlank } from "../utils/ContentValidationUtils.js";
 import Icon from "./common/Icon.jsx";
 
 export default function GifCard({ imgSrc, numView, numChat, numLove }) {
@@ -13,9 +14,9 @@ export default function GifCard({ imgSrc, numView, numChat, numLove }) {
             <div className="d-flex justify-content-between px-1">
               <Icon iconClass="bi bi-paperclip" />
               <div>
-                {numView && <Icon className="me-3" iconClass="bi bi-eye-fill" description={numView} />}
-                {numChat && <Icon className="me-3" iconClass="bi bi-chat-quote-fill" description={numChat} />}
-                {numLove && <Icon className="pe-1" iconClass="bi bi-heart-fill" description={numLove} />}
+                {isNotBlank(numView) && <Icon className="me-3" iconClass="bi bi-eye-fill" description={numView} />}
+                {isNotBlank(numChat) && <Icon className="me-3" iconClass="bi bi-chat-quote-fill" description={numChat} />}
+                {isNotBlank(numLove) && <Icon className="pe-1" iconClass="bi bi-heart-fill" description={numLove} />}
               </div>
             </div>
           </div>
