@@ -5,7 +5,7 @@ export default function Icon({ className, iconClass, description, handleOnClick 
 
   return (
     <span
-      className={className + " cursor-pointer text-black-50 text-hover-royalblue"} // TODO fix undefined className
+      className={[className, "cursor-pointer text-black-50 text-hover-royalblue"].join(" ").trim()}
       onClick={handleOnClick}
     >
       <i className={iconClass}>{description}</i>
