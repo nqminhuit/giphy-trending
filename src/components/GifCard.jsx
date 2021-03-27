@@ -10,8 +10,8 @@ export default function GifCard({
 }) {
 
   return (
-    imgSrc
-      ? (
+    <>
+      {imgSrc && (
         <div className="w-95 m-auto font-size-small">
           <div className="d-flex flex-column justify-content-between bg-white shadow py-2">
             <img className="img-fluid p-2 cursor-pointer" src={imgSrc} onClick={viewImage} />
@@ -19,8 +19,8 @@ export default function GifCard({
           </div>
           <GifAuthorInfo {...{ authorImgUrl, authorProfileUrl, authorUsername }} />
         </div>
-      )
-      : null
+      )}
+    </>
   );
 
 }

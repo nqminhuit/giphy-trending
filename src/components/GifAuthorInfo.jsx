@@ -4,8 +4,8 @@ import React from "react";
 export default function GifAuthorInfo({ authorImgUrl, authorProfileUrl, authorUsername }) {
 
   return (
-    authorUsername
-      ? (
+    <>
+      {authorUsername && (
         <div className="mt-2 ms-2">
           <a href={authorProfileUrl} className="text-decoration-none fw-bold cl-royalblue">
             {authorImgUrl &&
@@ -18,8 +18,8 @@ export default function GifAuthorInfo({ authorImgUrl, authorProfileUrl, authorUs
             {authorUsername}
           </a>
         </div>
-      )
-      : null
+      )}
+    </>
   );
 }
 
