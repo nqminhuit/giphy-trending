@@ -9,7 +9,7 @@ export default function GifCard({ imgSrc, numView, numComment, numLove, authorIm
   return (
     imgSrc
       ? (
-        <div className="w-75 m-auto font-size-small">
+        <div className="w-95 m-auto font-size-small">
           <div className="d-flex flex-column justify-content-between bg-white shadow py-2">
             <img className="img-fluid p-2 cursor-pointer" src={imgSrc} onClick={viewImage} />
             <GifMeta {...{ numView, numComment, numLove }} />
