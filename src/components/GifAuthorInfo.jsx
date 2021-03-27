@@ -1,35 +1,30 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
+import { GifMetaDataContext } from "./GifCard.jsx";
 
-export default function GifAuthorInfo({ authorImgUrl, authorProfileUrl, authorUsername }) {
-
+export default function GifAuthorInfo() {
+  const { authorAvatarUrl, authorProfileUrl, authorUsername } = useContext(GifMetaDataContext);
+  const usernameTrimed = authorUsername.trim();
   return (
     <>
-      {authorUsername && (
+      {usernameTrimed && (
         <div className="mt-2 ms-2">
           <a
             className="text-decoration-none fw-bold cl-royalblue"
-            href={authorProfileUrl}
+            href={authorProfileUrl.trim() || "#"}
             target="_blank"
             rel="noreferrer"
           >
-            {authorImgUrl &&
+            {authorAvatarUrl.trim() &&
               <img
                 className="max-height-1rem rounded-circle me-1"
-                src={authorImgUrl}
+                src={authorAvatarUrl}
                 alt="giphy author image"
               />
             }
-            {authorUsername}
+            {usernameTrimed}
           </a>
         </div>
       )}
     </>
   );
 }
-
-GifAuthorInfo.propTypes = {
-  authorImgUrl: PropTypes.string,
-  authorProfileUrl: PropTypes.string,
-  authorUsername: PropTypes.string,
-};

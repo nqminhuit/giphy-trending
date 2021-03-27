@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GifCard from "../components/GifCard.jsx";
+import GifCard, { GifMetaDataContext } from "../components/GifCard.jsx";
 import Constants from "../constants/AppConstants.js";
 import { fetchGifs } from "../controllers/FetchGifs.js";
 import { randomNumber } from "../utils/RandomNumber.js";
@@ -40,25 +40,38 @@ export default function GiphyGallery() {
         {
           gifs.map(gifItem => {
             const { id, user, title, gif } = gifItem;
+            const { authorAvatarUrl, authorProfileUrl, authorUsername } = extractUserInfo(user);
             return (
               <div key={id} className="col-6 col-md-4 col-lg-3 my-3">
-                <GifCard
-                  imgId={id}
-                  imgSrc={gif.fixed_height.webp}
-                  imgOrgriginalSrc={gif.original.url}
-                  imgTitle={title}
-                  numView={randomNumber(0, 10_000)}
-                  numComment={randomNumber(0, 100)}
-                  numLove={randomNumber(0, 1000)}
-                  authorImgUrl={user && user.avatar_url}
-                  authorProfileUrl={user && user.profile_url}
-                  authorUsername={user && user.username}
-                />
+                <GifMetaDataContext.Provider value={{
+                  imgId: id,
+                  imgSrc: gif.fixed_height.webp,
+                  imgOrgriginalSrc: gif.original.url,
+                  imgTitle: title,
+                  numView: randomNumber(0, 10_000), // pretends these numbers are from API
+                  numComment: randomNumber(0, 100),
+                  numLove: randomNumber(0, 1000),
+                  authorAvatarUrl,
+                  authorProfileUrl,
+                  authorUsername,
+                }}>
+                  <GifCard />
+                </GifMetaDataContext.Provider>
               </div>
             );
           })
         }
       </div>
-    </div>
+    </div >
   );
+}
+
+function extractUserInfo(user) {
+  let authorAvatarUrl = "", authorProfileUrl = "", authorUsername = "";
+  if (user) {
+    authorAvatarUrl = user.avatar_url;
+    authorProfileUrl = user.profile_url;
+    authorUsername = user.username;
+  }
+  return { authorAvatarUrl, authorProfileUrl, authorUsername };
 }

@@ -1,15 +1,13 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import GifAuthorInfo from "./GifAuthorInfo.jsx";
 import GifMeta from "./GifMeta.jsx";
 
-// TODO introduce context to avoid props drilling
-export default function GifCard({
-  imgId, imgSrc, imgTitle, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername,
-  imgOrgriginalSrc
-}) {
+export const GifMetaDataContext = React.createContext(null);
+
+export default function GifCard() {
   const history = useHistory();
+  const { imgId, imgTitle, imgSrc, imgOrgriginalSrc } = useContext(GifMetaDataContext);
 
   return (
     <>
@@ -24,25 +22,12 @@ export default function GifCard({
                 onClick={() => history.push(`view/${imgId}`, { gifOriginUrl: imgOrgriginalSrc })}
               />
             </div>
-            <GifMeta {...{ numView, numComment, numLove, imgId, imgOrgriginalSrc }} />
+            <GifMeta />
           </div>
-          <GifAuthorInfo {...{ authorImgUrl, authorProfileUrl, authorUsername }} />
+          <GifAuthorInfo />
         </div>
       )}
     </>
   );
 
 }
-
-GifCard.propTypes = {
-  imgSrc: PropTypes.string,
-  imgId: PropTypes.string,
-  imgOrgriginalSrc: PropTypes.string,
-  imgTitle: PropTypes.string,
-  numView: PropTypes.number,
-  numComment: PropTypes.number,
-  numLove: PropTypes.number,
-  authorImgUrl: PropTypes.string,
-  authorProfileUrl: PropTypes.string,
-  authorUsername: PropTypes.string,
-};

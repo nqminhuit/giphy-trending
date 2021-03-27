@@ -1,11 +1,12 @@
-import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { isNotBlank } from "../utils/ContentValidationUtils.js";
 import Icon from "./common/Icon.jsx";
+import { GifMetaDataContext } from "./GifCard.jsx";
 
-export default function GifMeta({ numView, numComment, numLove, imgOrgriginalSrc, imgId }) {
+export default function GifMeta() {
   const history = useHistory();
+  const { imgId, imgOrgriginalSrc, numView, numComment, numLove } = useContext(GifMetaDataContext);
 
   return (
     <div className="d-flex justify-content-between px-1 mb-1">
@@ -38,11 +39,3 @@ export default function GifMeta({ numView, numComment, numLove, imgOrgriginalSrc
   );
 
 }
-
-GifMeta.propTypes = {
-  numView: PropTypes.number,
-  numComment: PropTypes.number,
-  numLove: PropTypes.number,
-  imgOrgriginalSrc: PropTypes.string,
-  imgId: PropTypes.string,
-};
