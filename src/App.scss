@@ -22,6 +22,10 @@ body {
   max-height: 1rem;
 }
 
+.gif-card-fixed-height {
+  height: 15rem;
+}
+
 .w-95 {
   width: 95% !important;
 }
@@ -33,5 +37,17 @@ body {
 @include media-breakpoint-down(sm) {
   .font-size-small {
     font-size: .4rem;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .gif-card-fixed-height {
+    height: 50vw;
+  }
+}
+
+@include media-breakpoint-between(md, lg) {
+  .gif-card-fixed-height {
+    height: 32vw;
   }
 }

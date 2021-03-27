@@ -7,7 +7,7 @@ import Icon from "./common/Icon.jsx";
 export default function GifMeta({ numView, numComment, numLove }) {
 
   return (
-    <div className="d-flex justify-content-between px-1">
+    <div className="d-flex justify-content-between px-1 mb-1">
       <Icon iconClass="bi bi-paperclip" handleOnClick={saveImage} />
       <div>
         {isNotBlank(numView) &&

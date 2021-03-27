@@ -13,8 +13,10 @@ export default function GifCard({
     <>
       {imgSrc && (
         <div className="w-95 m-auto font-size-small">
-          <div className="d-flex flex-column justify-content-between bg-white shadow py-2">
-            <img className="img-fluid p-2 cursor-pointer" src={imgSrc} onClick={viewImage} />
+          <div className="d-flex flex-column bg-white shadow gif-card-fixed-height">
+            <div className="d-flex flex-grow-1 mx-auto">
+              <img className="img-fluid p-2 cursor-pointer align-self-center" src={imgSrc} onClick={viewImage} />
+            </div>
             <GifMeta {...{ numView, numComment, numLove }} />
           </div>
           <GifAuthorInfo {...{ authorImgUrl, authorProfileUrl, authorUsername }} />
