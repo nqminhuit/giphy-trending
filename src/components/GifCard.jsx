@@ -4,7 +4,10 @@ import { viewImage } from "../utils/ImageMetaUtils.js";
 import GifAuthorInfo from "./GifAuthorInfo.jsx";
 import GifMeta from "./GifMeta.jsx";
 
-export default function GifCard({ imgSrc, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername }) {
+// TODO introduce context to avoid props drilling
+export default function GifCard({
+  imgSrc, numView, numComment, numLove, authorImgUrl, authorProfileUrl, authorUsername
+}) {
 
   return (
     imgSrc
