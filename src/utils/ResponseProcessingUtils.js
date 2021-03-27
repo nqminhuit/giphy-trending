@@ -6,13 +6,12 @@ export function extractGifsData(httpResponse) {
   if (!responseData) {
     throw new Error("No response data found");
   }
-
-  const gifsData = responseData.data;
-  if (!gifsData) {
+  const { data, pagination } = responseData;
+  if (!data) {
     throw new Error("No gif data found");
   }
 
-  return gifsData;
+  return { gifsData: data, pagination };
 }
 
 /**

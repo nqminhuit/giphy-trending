@@ -7,27 +7,31 @@ import { randomNumber } from "../utils/RandomNumber.js";
 export default function GiphyGallery() {
   const [gifs, setGifs] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [paging, setPaging] = useState(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", fetchMoreGifs, true);
+    window.addEventListener("scroll", fetchMoreGifs);
     return function cleanUpScrollEvent() {
-      console.log("mmm remove on scroll");
       window.removeEventListener("scroll", fetchMoreGifs);
     };
   });
 
   useEffect(() => {
     fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, offset, Constants.LIMIT_GIFS_PER_LOAD)
-      .then(newGifs => setGifs(oldGifs => oldGifs.concat(newGifs)))
+      .then(({ truncatedGifs: newGifs, pagination }) => {
+        setGifs(oldGifs => oldGifs.concat(newGifs));
+        setPaging(pagination);
+      })
       .catch(console.error);
   }, [offset]);
 
   function fetchMoreGifs() {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    if (scrollTop + clientHeight >= scrollHeight - 10) { // check total
-      setTimeout(() => setOffset(offset + Constants.LIMIT_GIFS_PER_LOAD), 1000);
+    const { total_count, count, offset: pagingOffset } = paging;
+    if (scrollTop + clientHeight >= scrollHeight - 10 && pagingOffset + count <= total_count) {
+      setOffset(offset + Constants.LIMIT_GIFS_PER_LOAD);
     }
-  };
+  }
 
   return (
     <div className="container-fluid">
