@@ -14,9 +14,9 @@ export default function GiphyGallery() {
   }, []);
 
   return (
-    <>
+    <div className="container-fluid">
       <h1 className="text-center">Wellcome to Giphy Trending!</h1>
-      <div className="container bg-light d-flex flex-wrap justify-content-evenly">
+      <div className="bg-light d-flex flex-wrap justify-content-evenly">
         {
           gifs.map(gifItem => {
             const { id, user, title, gif } = gifItem;
@@ -37,6 +37,6 @@ export default function GiphyGallery() {
           })
         }
       </div>
-    </>
+    </div>
   );
 }
