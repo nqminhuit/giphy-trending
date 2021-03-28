@@ -1,5 +1,5 @@
-import { Skeleton } from "@material-ui/lab";
 import React, { useEffect, useState } from "react";
+import Loading from "../components/common/Loading.jsx";
 import GifCard, { GifMetaDataContext } from "../components/GifCard.jsx";
 import Constants from "../constants/AppConstants.js";
 import { fetchGifs } from "../controllers/FetchGifs.js";
@@ -25,22 +25,19 @@ export default function GiphyGallery() {
       .then(({ truncatedGifs: newGifs, pagination }) => {
         if (newGifs && newGifs.length > 0) {
           setAllGifs(oldGifs => oldGifs.concat(newGifs));
-          setRenderedGifs(oldState => oldState.concat(renderGifs(newGifs, true)));
         }
         setPaging(pagination);
       })
       .catch(console.error)
-      .finally(() => setLoading(false));
+      .finally(() => setTimeout(() => setLoading(false), 1500));
   }, [offset]);
 
   useEffect(() => {
     if (loading === false && paging != null && allGifs.length > 0) {
-      setRenderedGifs(renderedAndLoading => {
+      setRenderedGifs(rendereds => {
         const loadingGifs = extractLoadingGifs(allGifs, paging.count);
-        const rendered = extractRenderedGifs(renderedAndLoading, paging.count);
-
         const renderLoadingGifs = renderGifs(loadingGifs, false);
-        return rendered.concat(renderLoadingGifs);
+        return rendereds.concat(renderLoadingGifs);
       });
     }
   }, [allGifs, loading, paging]);
@@ -53,16 +50,13 @@ export default function GiphyGallery() {
       <div className="bg-light d-flex flex-wrap justify-content-evenly">
         {renderedGifs}
       </div>
+      {loading && <Loading />}
     </div >
   );
 }
 
 function extractLoadingGifs(allGifs, count) {
   return allGifs.slice(-count);
-}
-
-function extractRenderedGifs(allRenderAndLoadingGifs, count) {
-  return allRenderAndLoadingGifs.slice(0, allRenderAndLoadingGifs.length - count);
 }
 
 function extractUserInfo(user) {
@@ -87,7 +81,7 @@ function updateOffsetState(setOffset, paging, documentElement) {
   }
 }
 
-function renderGifs(gifs, loading) {
+function renderGifs(gifs) {
   return gifs.map(gifItem => {
     const { id, user, title, gif } = gifItem;
     const { authorAvatarUrl, authorProfileUrl, authorUsername } = extractUserInfo(user);
@@ -105,16 +99,7 @@ function renderGifs(gifs, loading) {
           authorProfileUrl,
           authorUsername,
         }}>
-          {loading
-            ? (
-              <Skeleton>
-                <div className="gif-card-fixed-height">
-                  <GifCard />
-                </div>
-              </Skeleton>
-            )
-            : <GifCard />
-          }
+          <GifCard />
         </GifMetaDataContext.Provider>
       </div>
     );
