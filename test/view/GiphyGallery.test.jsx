@@ -47,7 +47,7 @@ describe("GiphyGallery", () => {
   });
 
   it("should render gifs after fetched", () => {
-    jest.runAllTimers();
+    act(() => jest.runAllTimers());
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
       `Wellcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
       `<div class="col-6 col-md-4 col-lg-3 my-3"><div class="w-95 m-auto font-size-small">` +
