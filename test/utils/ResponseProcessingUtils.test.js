@@ -13,7 +13,9 @@ describe("test extractGifsData", () => {
     expect(pagination).toMatchObject({ total_count: 111561, count: 2, offset: 0 });
     expect(gifsData).toHaveLength(2);
 
-    const gifsDataTruncated = gifsData.map(gif => ({ gifId: gif.id, gifTitle: gif.title, user: gif.user, images: gif.images }));
+    const gifsDataTruncated = gifsData.map(gif => ({
+      gifId: gif.id, gifTitle: gif.title, user: gif.user, images: gif.images
+    }));
     const gifIds = gifsDataTruncated.map(item => item.gifId);
     expect(gifIds).toContain("KD8Ldwzx90X9hi9QHW");
     expect(gifIds).toContain("WoifpFfPMrbQG875JC");
@@ -37,7 +39,9 @@ describe("test extractGifsData", () => {
     expect(profileUrls).toContain("https://giphy.com/IKEAUSA/");
     expect(profileUrls).toContain("https://giphy.com/Creamlovers/");
 
-    const allImages = gifsDataTruncated.map(item => ({ fixed_height: item.images.fixed_height, original: item.images.original }));
+    const allImages = gifsDataTruncated.map(item => ({
+      fixed_height: item.images.fixed_height, original: item.images.original
+    }));
     expect(allImages).toHaveLength(2);
     const fixedHeightGifs = allImages.map(img => img.fixed_height);
     expect(fixedHeightGifs).toContain(mockHttpResponse.data.data[0].images.fixed_height);
@@ -81,10 +85,10 @@ describe("test truncateGifData", () => {
     const truncatedData = truncateGifData(mockGifData);
     expect(truncatedData).toEqual({
       id: 1,
-      title: 'test_title',
+      title: "test_title",
       gif: {
-        fixed_height: { some_properties: 'some_props_fixed_height' },
-        original: { some_properties: 'some_props_original' }
+        fixed_height: { some_properties: "some_props_fixed_height" },
+        original: { some_properties: "some_props_original" }
       }
     });
   });
@@ -105,10 +109,10 @@ describe("test truncateGifData", () => {
     const truncatedData = truncateGifData(mockGifData);
     expect(truncatedData).toEqual({
       id: 1,
-      title: 'test_title',
+      title: "test_title",
       gif: {
-        fixed_height: { some_properties: 'some_props_fixed_height' },
-        original: { some_properties: 'some_props_original' }
+        fixed_height: { some_properties: "some_props_fixed_height" },
+        original: { some_properties: "some_props_original" }
       }
     });
   });
@@ -140,10 +144,10 @@ describe("test truncateGifData", () => {
     const truncatedData = truncateGifData(mockGifData);
     expect(truncatedData).toEqual({
       id: 1,
-      title: 'test_title',
+      title: "test_title",
       gif: {
-        fixed_height: { some_properties: 'some_props_fixed_height' },
-        original: { some_properties: 'some_props_original' }
+        fixed_height: { some_properties: "some_props_fixed_height" },
+        original: { some_properties: "some_props_original" }
       },
       user: {
         avatar_url: "https://media4.giphy.com/avatars/IKEAUSA/cSMrv32MRdWa.png",
