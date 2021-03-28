@@ -7,7 +7,8 @@
     "clean": "rm -rf dist;",
     "build": "webpack --config webpack.dev.js",
     "lint": "eslint --ext .js,.jsx src test",
-    "test": "jest ."
+    "test": "jest .",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "keywords": [],
   "author": "",
