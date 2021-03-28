@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render <GifView /> 1`] = `
+<div
+  className="w-100 h-100 bg-dark position-fixed d-flex"
+>
+  <img
+    alt="giphy gif"
+    className="img-fluid m-auto"
+    src="https://www.giphy.com"
+  />
+</div>
+`;

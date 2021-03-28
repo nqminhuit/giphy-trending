@@ -6,7 +6,9 @@
     "start": "npm run clean; webpack serve --config webpack.dev.js",
     "clean": "rm -rf dist;",
     "build": "webpack --config webpack.dev.js",
-    "lint": "eslint --ext .js,.jsx src"
+    "lint": "eslint --ext .js,.jsx src test",
+    "test": "jest .",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +24,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.12.13",
+    "@types/jest": "^26.0.22",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
     "eslint": "^7.22.0",
@@ -30,11 +34,18 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.2",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.7.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.scss$": "<rootDir>/test/__mocks__/styleMock.js"
+    }
   }
 }
