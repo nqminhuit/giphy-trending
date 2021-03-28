@@ -28,12 +28,14 @@ export default function GiphyGallery() {
         }
         setPaging(pagination);
       })
-      .catch(console.error)
+      .catch(() => {
+        throw new Error("error when fetching gifs");
+      })
       .finally(() => setTimeout(() => setLoading(false), 1500));
   }, [offset]);
 
   useEffect(() => {
-    if (loading === false && paging != null && allGifs.length > 0) {
+    if (loading === false && paging !== null && allGifs.length > 0) {
       setRenderedGifs(rendereds => {
         const loadingGifs = extractLoadingGifs(allGifs, paging.count);
         const renderLoadingGifs = renderGifs(loadingGifs, false);

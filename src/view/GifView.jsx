@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useHistory } from "react-router";
 
-// TODO:Introducing Error Boundaries: https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
 export default function GifView() {
   const history = useHistory();
   if (!history.location) {
