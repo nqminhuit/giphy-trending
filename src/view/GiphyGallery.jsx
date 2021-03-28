@@ -6,8 +6,7 @@ import { fetchGifs } from "../controllers/FetchGifs.js";
 import { randomNumber } from "../utils/RandomNumber.js";
 
 export default function GiphyGallery() {
-  const [gifs, setGifs] = useState([]);
-  // const [newGifs, setNewGifs] = useState([]);
+  const [allGifs, setAllGifs] = useState([]);
   const [renderedGifs, setRenderedGifs] = useState([]);
   const [offset, setOffset] = useState(0);
   const [paging, setPaging] = useState(null);
@@ -24,22 +23,27 @@ export default function GiphyGallery() {
     setLoading(true);
     fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, offset, Constants.LIMIT_GIFS_PER_LOAD)
       .then(({ truncatedGifs: newGifs, pagination }) => {
-        setGifs(oldGifs => oldGifs.concat(newGifs));
-        // setNewGifs(newGifs);
-        if (newGifs.length > 0) {
+        if (newGifs && newGifs.length > 0) {
+          setAllGifs(oldGifs => oldGifs.concat(newGifs));
           setRenderedGifs(oldState => oldState.concat(renderGifs(newGifs, true)));
         }
         setPaging(pagination);
       })
       .catch(console.error)
-      .finally(() => setTimeout(() => setLoading(false), 1500));
+      .finally(() => setLoading(false));
   }, [offset]);
 
   useEffect(() => {
-    if (loading === false) {
-      setRenderedGifs(renderGifs(gifs, loading));
+    if (loading === false && paging != null && allGifs.length > 0) {
+      setRenderedGifs(renderedAndLoading => {
+        const loadingGifs = extractLoadingGifs(allGifs, paging.count);
+        const rendered = extractRenderedGifs(renderedAndLoading, paging.count);
+
+        const renderLoadingGifs = renderGifs(loadingGifs, false);
+        return rendered.concat(renderLoadingGifs);
+      });
     }
-  }, [gifs, loading]);
+  }, [allGifs, loading, paging]);
 
   const fetchMoreGifs = () => updateOffsetState(setOffset, paging, document.documentElement);
 
@@ -53,6 +57,13 @@ export default function GiphyGallery() {
   );
 }
 
+function extractLoadingGifs(allGifs, count) {
+  return allGifs.slice(-count);
+}
+
+function extractRenderedGifs(allRenderAndLoadingGifs, count) {
+  return allRenderAndLoadingGifs.slice(0, allRenderAndLoadingGifs.length - count);
+}
 
 function extractUserInfo(user) {
   let authorAvatarUrl = "", authorProfileUrl = "", authorUsername = "";
@@ -77,7 +88,6 @@ function updateOffsetState(setOffset, paging, documentElement) {
 }
 
 function renderGifs(gifs, loading) {
-  console.log("mmm render gifs with loading = ", loading);
   return gifs.map(gifItem => {
     const { id, user, title, gif } = gifItem;
     const { authorAvatarUrl, authorProfileUrl, authorUsername } = extractUserInfo(user);
