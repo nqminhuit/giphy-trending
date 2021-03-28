@@ -34,6 +34,7 @@ describe("GiphyGallery", () => {
     container = null;
   });
 
+  /*eslint-disable */
   it("should render loading indicator first hand", () => {
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
       `Wellcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
@@ -77,4 +78,5 @@ describe("GiphyGallery", () => {
       ` src="https://media0.giphy.com/avatars/Creamlovers/5NOufBa97ZA6.gif" alt="giphy author image">Creamlovers` +
       `</a></div></div></div></div></div>`);
   });
+  /*eslint-enable */
 });
