@@ -69,7 +69,7 @@ function updateOffsetState(setOffset, paging, documentElement) {
   const isNotLastOffset = pagingOffset + count < total_count;
 
   const { scrollTop, scrollHeight, clientHeight } = documentElement;
-  const isAtBottomPage = scrollTop + clientHeight >= scrollHeight - 5;
+  const isAtBottomPage = scrollTop + clientHeight >= scrollHeight - 250;
 
   if (isNotLastOffset && isAtBottomPage) {
     setOffset(oldOffset => oldOffset + count);
