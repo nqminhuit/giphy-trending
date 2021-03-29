@@ -1,6 +1,6 @@
 export const expectedTruncatedGifData_0 = {
-  id: 'KD8Ldwzx90X9hi9QHW',
-  title: 'Tired At Home GIF by IKEA USA',
+  id: "KD8Ldwzx90X9hi9QHW",
+  title: "Tired At Home GIF by IKEA USA",
   gif: {
     fixed_height: {
       "height": "200",
@@ -26,15 +26,15 @@ export const expectedTruncatedGifData_0 = {
     }
   },
   user: {
-    avatar_url: 'https://media4.giphy.com/avatars/IKEAUSA/cSMrv32MRdWa.png',
-    username: 'IKEAUSA',
-    profile_url: 'https://giphy.com/IKEAUSA/'
+    avatar_url: "https://media4.giphy.com/avatars/IKEAUSA/cSMrv32MRdWa.png",
+    username: "IKEAUSA",
+    profile_url: "https://giphy.com/IKEAUSA/"
   }
 };
 
 export const expectedTruncatedGifData_1 = {
-  id: 'WoifpFfPMrbQG875JC',
-  title: 'Wake Up Sleeping GIF by The Creamlovers',
+  id: "WoifpFfPMrbQG875JC",
+  title: "Wake Up Sleeping GIF by The Creamlovers",
   gif: {
     fixed_height: {
       "height": "200",
@@ -60,8 +60,8 @@ export const expectedTruncatedGifData_1 = {
     }
   },
   user: {
-    avatar_url: 'https://media0.giphy.com/avatars/Creamlovers/5NOufBa97ZA6.gif',
-    username: 'Creamlovers',
-    profile_url: 'https://giphy.com/Creamlovers/'
+    avatar_url: "https://media0.giphy.com/avatars/Creamlovers/5NOufBa97ZA6.gif",
+    username: "Creamlovers",
+    profile_url: "https://giphy.com/Creamlovers/"
   }
 };
