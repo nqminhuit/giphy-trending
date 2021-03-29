@@ -53,8 +53,8 @@ describe("GiphyGallery", () => {
       `Welcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
       `<div class="col-6 col-md-4 col-lg-3 my-3"><div class="w-95 m-auto font-size-small">` +
       `<div class="d-flex flex-column bg-white shadow gif-card-fixed-height">` +
-      `<div class="d-flex flex-grow-1 mx-auto">` +
-      `<img class="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain" ` +
+      `<div class="d-flex flex-grow-1 mx-auto overflow-hidden">` +
+      `<img class="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain hover-scale transition-eio-3" ` +
       `src="https://media1.giphy.com/media/KD8Ldwzx90X9hi9QHW/200.webp?cid=1405890bvvaqtyx2ngrgzlcnsrztqed883xibfpiksp32ywj&amp;rid=200.webp"` +
       ` alt="Tired At Home GIF by IKEA USA"></div><div class="d-flex justify-content-between px-1 mb-1">` +
       `<span class="cursor-pointer text-black-50 text-hover-royalblue"><i class="bi bi-paperclip"></i></span>` +
@@ -65,8 +65,8 @@ describe("GiphyGallery", () => {
       `href="https://giphy.com/IKEAUSA/" target="_blank" rel="noreferrer"><img class="max-height-1rem rounded-circle me-1"` +
       ` src="https://media4.giphy.com/avatars/IKEAUSA/cSMrv32MRdWa.png" alt="giphy author image">IKEAUSA</a></div>` +
       `</div></div><div class="col-6 col-md-4 col-lg-3 my-3"><div class="w-95 m-auto font-size-small">` +
-      `<div class="d-flex flex-column bg-white shadow gif-card-fixed-height"><div class="d-flex flex-grow-1 mx-auto">` +
-      `<img class="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain" ` +
+      `<div class="d-flex flex-column bg-white shadow gif-card-fixed-height"><div class="d-flex flex-grow-1 mx-auto overflow-hidden">` +
+      `<img class="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain hover-scale transition-eio-3" ` +
       `src="https://media4.giphy.com/media/WoifpFfPMrbQG875JC/200.webp?cid=1405890bvvaqtyx2ngrgzlcnsrztqed883xibfpiksp32ywj&amp;rid=200.webp"` +
       ` alt="Wake Up Sleeping GIF by The Creamlovers"></div><div class="d-flex justify-content-between px-1 mb-1">` +
       `<span class="cursor-pointer text-black-50 text-hover-royalblue"><i class="bi bi-paperclip"></i></span><div>` +

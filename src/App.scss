@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 .cl-royalblue {
-  color: royalblue
+  color: royalblue;
 }
 
 .cursor-pointer {
@@ -9,7 +9,7 @@
 }
 
 .text-hover-royalblue:hover {
-  color: royalblue !important
+  color: royalblue !important;
 }
 
 .max-height-1rem {
@@ -29,7 +29,7 @@
 }
 
 .w-95 {
-  width: 95% !important;
+  width: 95%;
 }
 
 .font-size-small {
@@ -55,4 +55,12 @@
   .gif-card-fixed-height {
     height: 32vw;
   }
+}
+
+.hover-scale:hover {
+  transform: scale(1.2);
+}
+
+.transition-eio-3 {
+  transition: all 0.3s ease-in-out;
 }

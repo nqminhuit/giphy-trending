@@ -8,11 +8,11 @@ exports[`should render <GifCard /> 1`] = `
     className="d-flex flex-column bg-white shadow gif-card-fixed-height"
   >
     <div
-      className="d-flex flex-grow-1 mx-auto"
+      className="d-flex flex-grow-1 mx-auto overflow-hidden"
     >
       <img
         alt="title"
-        className="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain"
+        className="img-fluid gif-card-max-height p-2 cursor-pointer align-self-center fit-contain hover-scale transition-eio-3"
         onClick={[Function]}
         src="https://www.gif.fixed_height.webp"
       />
