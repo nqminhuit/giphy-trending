@@ -37,7 +37,7 @@ describe("GiphyGallery", () => {
   /*eslint-disable */
   it("should render loading indicator first hand", () => {
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
-      `Wellcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
+      `Welcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
       `</div><div class="position-sticky bottom-0 bg-light d-flex justify-content-center">` +
       `<div class="spinner-grow text-primary" role="status"></div>` +
       `<div class="spinner-grow text-secondary" role="status"></div>` +
@@ -50,7 +50,7 @@ describe("GiphyGallery", () => {
   it("should render gifs after fetched", () => {
     act(() => jest.runAllTimers());
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
-      `Wellcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
+      `Welcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
       `<div class="col-6 col-md-4 col-lg-3 my-3"><div class="w-95 m-auto font-size-small">` +
       `<div class="d-flex flex-column bg-white shadow gif-card-fixed-height">` +
       `<div class="d-flex flex-grow-1 mx-auto">` +

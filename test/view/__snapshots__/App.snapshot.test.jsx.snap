@@ -7,7 +7,7 @@ exports[`should render <App /> 1`] = `
   <h1
     className="text-center"
   >
-    Wellcome to Giphy Trending!
+    Welcome to Giphy Trending!
   </h1>
   <div
     className="bg-light d-flex flex-wrap justify-content-evenly"

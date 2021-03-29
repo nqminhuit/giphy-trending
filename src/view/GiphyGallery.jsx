@@ -48,7 +48,7 @@ export default function GiphyGallery() {
 
   return (
     <div className="container">
-      <h1 className="text-center">Wellcome to Giphy Trending!</h1>
+      <h1 className="text-center">Welcome to Giphy Trending!</h1>
       <div className="bg-light d-flex flex-wrap justify-content-evenly">
         {renderedGifs}
       </div>
