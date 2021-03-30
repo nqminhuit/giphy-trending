@@ -19,6 +19,8 @@ export default function GiphyGallery() {
   });
 
   useEffect(() => {
+    let timeoutId = null;
+    setLoading(true);
     fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, 0, Constants.LIMIT_GIFS_PER_LOAD)
       .then(({ truncatedGifs: newGifs, pagination }) => {
         if (newGifs && newGifs.length > 0) {
@@ -29,8 +31,12 @@ export default function GiphyGallery() {
         throw new Error("error when fetching gifs");
       })
       .finally(() => {
-        setTimeout(() => setLoading(false), 1500);
+        timeoutId = setTimeout(() => setLoading(false), 1500);
       });
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
