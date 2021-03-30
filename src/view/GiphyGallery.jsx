@@ -6,11 +6,10 @@ import { fetchGifs } from "../controllers/FetchGifs.js";
 import { randomNumber } from "../utils/RandomNumber.js";
 
 export default function GiphyGallery() {
-  const [allGifs, setAllGifs] = useState([]);
+  const [allGifs, setAllGifs] = useState(null);
   const [renderedGifs, setRenderedGifs] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const [paging, setPaging] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [canFetch, setCanFetch] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", fetchMoreGifs);
@@ -20,31 +19,68 @@ export default function GiphyGallery() {
   });
 
   useEffect(() => {
-    setLoading(true);
-    fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, offset, Constants.LIMIT_GIFS_PER_LOAD)
+    fetchGifs(Constants.GIPHY_TRENDING_ENDPOINT, Constants.API_KEY, 0, Constants.LIMIT_GIFS_PER_LOAD)
       .then(({ truncatedGifs: newGifs, pagination }) => {
         if (newGifs && newGifs.length > 0) {
-          setAllGifs(oldGifs => oldGifs.concat(newGifs));
+          setAllGifs({ gifs: newGifs, paging: pagination });
         }
-        setPaging(pagination);
       })
       .catch(() => {
         throw new Error("error when fetching gifs");
       })
-      .finally(() => setTimeout(() => setLoading(false), 1500));
-  }, [offset]);
+      .finally(() => {
+        setTimeout(() => setLoading(false), 1500);
+      });
+  }, []);
 
   useEffect(() => {
-    if (loading === false && paging !== null && allGifs.length > 0) {
+    if (loading === false && allGifs !== null && allGifs.paging !== null && allGifs.gifs && allGifs.gifs.length > 0) {
       setRenderedGifs(rendereds => {
-        const loadingGifs = extractLoadingGifs(allGifs, paging.count);
+        const loadingGifs = extractLoadingGifs(allGifs.gifs, allGifs.paging.count);
         const renderLoadingGifs = renderGifs(loadingGifs, false);
         return rendereds.concat(renderLoadingGifs);
       });
     }
-  }, [allGifs, loading, paging]);
+  }, [allGifs, loading]);
 
-  const fetchMoreGifs = () => updateOffsetState(setOffset, paging, document.documentElement);
+  useEffect(() => setCanFetch(true), [renderedGifs]);
+
+  const fetchMoreGifs = () => {
+    if (!allGifs) {
+      return;
+    }
+
+    const paging = allGifs.paging;
+    if (!canFetchScroll(paging, document.documentElement)) {
+      return;
+    }
+
+    if (!canFetch) {
+      return;
+    }
+
+    setLoading(true);
+    setCanFetch(false);
+    if (paging) {
+      fetchGifs(
+        Constants.GIPHY_TRENDING_ENDPOINT,
+        Constants.API_KEY,
+        paging.offset + paging.count,
+        Constants.LIMIT_GIFS_PER_LOAD
+      )
+        .then(({ truncatedGifs: newGifs, pagination }) => {
+          if (newGifs && newGifs.length > 0) {
+            setAllGifs(oldState => ({ gifs: oldState.gifs.concat(newGifs), paging: pagination }));
+          }
+        })
+        .catch(() => {
+          throw new Error("error when fetching gifs");
+        })
+        .finally(() => {
+          setTimeout(() => setLoading(false), 1500);
+        });
+    }
+  };
 
   return (
     <div className="container">
@@ -71,16 +107,14 @@ function extractUserInfo(user) {
   return { authorAvatarUrl, authorProfileUrl, authorUsername };
 }
 
-function updateOffsetState(setOffset, paging, documentElement) {
+function canFetchScroll(paging, documentElement) {
   const { total_count, count, offset: pagingOffset } = paging;
   const isNotLastOffset = pagingOffset + count < total_count;
 
   const { scrollTop, scrollHeight, clientHeight } = documentElement;
   const isAtBottomPage = scrollTop + clientHeight >= scrollHeight - 250;
 
-  if (isNotLastOffset && isAtBottomPage) {
-    setOffset(oldOffset => oldOffset + count);
-  }
+  return isNotLastOffset && isAtBottomPage;
 }
 
 function renderGifs(gifs) {
