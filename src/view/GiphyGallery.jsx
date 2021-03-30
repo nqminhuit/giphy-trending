@@ -3,6 +3,7 @@ import Loading from "../components/common/Loading.jsx";
 import GifCard, { GifMetaDataContext } from "../components/GifCard.jsx";
 import Constants from "../constants/AppConstants.js";
 import { fetchGifs } from "../controllers/FetchGifs.js";
+import { fetchMoreGifs } from "../utils/InfiniteScrollEventHandler.js";
 import { randomNumber } from "../utils/RandomNumber.js";
 
 export default function GiphyGallery() {
@@ -12,9 +13,9 @@ export default function GiphyGallery() {
   const [canFetch, setCanFetch] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", fetchMoreGifs);
+    window.addEventListener("scroll", scrollEventHandler);
     return function cleanUpScrollEvent() {
-      window.removeEventListener("scroll", fetchMoreGifs);
+      window.removeEventListener("scroll", scrollEventHandler);
     };
   });
 
@@ -51,41 +52,12 @@ export default function GiphyGallery() {
 
   useEffect(() => setCanFetch(true), [renderedGifs]);
 
-  const fetchMoreGifs = () => {
-    if (!allGifs) {
+  const scrollEventHandler = () => {
+    if (!allGifs || !canFetch) {
       return;
     }
-
     const paging = allGifs.paging;
-    if (!canFetchScroll(paging, document.documentElement)) {
-      return;
-    }
-
-    if (!canFetch) {
-      return;
-    }
-
-    setLoading(true);
-    setCanFetch(false);
-    if (paging) {
-      fetchGifs(
-        Constants.GIPHY_TRENDING_ENDPOINT,
-        Constants.API_KEY,
-        paging.offset + paging.count,
-        Constants.LIMIT_GIFS_PER_LOAD
-      )
-        .then(({ truncatedGifs: newGifs, pagination }) => {
-          if (newGifs && newGifs.length > 0) {
-            setAllGifs(oldState => ({ gifs: oldState.gifs.concat(newGifs), paging: pagination }));
-          }
-        })
-        .catch(() => {
-          throw new Error("error when fetching gifs");
-        })
-        .finally(() => {
-          setTimeout(() => setLoading(false), 1500);
-        });
-    }
+    fetchMoreGifs(paging, setAllGifs, setLoading, setCanFetch, fetchGifs, document.documentElement);
   };
 
   return (
@@ -111,16 +83,6 @@ function extractUserInfo(user) {
     authorUsername = user.username;
   }
   return { authorAvatarUrl, authorProfileUrl, authorUsername };
-}
-
-function canFetchScroll(paging, documentElement) {
-  const { total_count, count, offset: pagingOffset } = paging;
-  const isNotLastOffset = pagingOffset + count < total_count;
-
-  const { scrollTop, scrollHeight, clientHeight } = documentElement;
-  const isAtBottomPage = scrollTop + clientHeight >= scrollHeight - 250;
-
-  return isNotLastOffset && isAtBottomPage;
 }
 
 function renderGifs(gifs) {
