@@ -2,8 +2,11 @@ import axios from "axios";
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import { Provider } from "react-redux";
+import Loading from "../../src/components/common/Loading.jsx";
 import { randomNumber } from "../../src/utils/RandomNumber.js";
 import GiphyGallery from "../../src/view/GiphyGallery.jsx";
+import { mockStore } from "../helpers/MockStore.js";
 import mockHttpResponse from "../utils/__mock__/mockHttpResponse.json";
 
 jest.mock("axios");
@@ -19,13 +22,6 @@ describe("GiphyGallery", () => {
     randomNumber.mockImplementation(() => 1234);
 
     container = document.createElement("div");
-    await act(async () => {
-      render(
-        <GiphyGallery />,
-        container
-      );
-    });
-    document.body.appendChild(container);
   });
 
   afterEach(() => {
@@ -34,20 +30,37 @@ describe("GiphyGallery", () => {
     container = null;
   });
 
+  async function prepareDOM(container, loading) {
+    await act(async () => {
+      render(
+        (
+          <Provider store={mockStore(loading)}>
+            <GiphyGallery />
+            <Loading />
+          </Provider>
+        ),
+        container
+      );
+    });
+    document.body.appendChild(container);
+  }
+
   /*eslint-disable */
-  it("should render loading indicator first hand", () => {
+  it("should render loading indicator first hand", async () => {
+    await prepareDOM(container, true);
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
       `Welcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +
-      `</div><div class="position-sticky bottom-0 bg-light d-flex justify-content-center">` +
+      `</div></div><div class="position-sticky bottom-0 bg-light d-flex justify-content-center">` +
       `<div class="spinner-grow text-primary" role="status"></div>` +
       `<div class="spinner-grow text-secondary" role="status"></div>` +
       `<div class="spinner-grow text-success" role="status"></div>` +
       `<div class="spinner-grow text-danger" role="status"></div>` +
       `<div class="spinner-grow text-warning" role="status"></div>` +
-      `<div class="spinner-grow text-info" role="status"></div></div></div>`);
+      `<div class="spinner-grow text-info" role="status"></div></div>`);
   });
 
-  it("should render gifs after fetched", () => {
+  it("should render gifs after fetched", async () => {
+    await prepareDOM(container, false);
     act(() => jest.runAllTimers());
     expect(container.innerHTML).toEqual(`<div class="container"><h1 class="text-center">` +
       `Welcome to Giphy Trending!</h1><div class="bg-light d-flex flex-wrap justify-content-evenly">` +

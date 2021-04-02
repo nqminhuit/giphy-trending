@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const loadingSlice = createSlice({
+const loadingSlice = createSlice({
   name: "loading",
   initialState: {
     value: false,
