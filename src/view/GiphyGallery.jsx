@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hideLoading, showLoading } from "../components/common/CommonSlice.js";
+import { toggleLoading } from "../components/common/CommonSlice.js";
 import GifCard, { GifMetaDataContext } from "../components/GifCard.jsx";
 import Constants from "../constants/AppConstants.js";
 import { fetchGifs } from "../controllers/FetchGifs.js";
@@ -44,12 +44,12 @@ export default function GiphyGallery() {
 
   useEffect(() => {
     if (loading === true) {
-      dispatch(showLoading());
+      dispatch(toggleLoading(true));
       return;
     }
 
     if (loading === false && allGifs !== null && allGifs.paging !== null && allGifs.gifs && allGifs.gifs.length > 0) {
-      dispatch(hideLoading());
+      dispatch(toggleLoading(false));
       setRenderedGifs(rendereds => {
         const loadingGifs = extractLoadingGifs(allGifs.gifs, allGifs.paging.count);
         const renderLoadingGifs = renderGifs(loadingGifs, false);
